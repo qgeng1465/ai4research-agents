@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI4科研 智能体 · 科研日常事务助手</title>
+<meta name="description" content="10 个开箱即用的科研日常 AI 智能体：论文写作、图表规范、基金、答辩、选刊、引用、统计与组会。">
+<style>
+  :root{--bg:#0f1117;--card:#1a1d27;--border:#2a2e3d;--fg:#e8eaf0;--muted:#9aa1b5;--accent:#7c5cff;--accent2:#00d4a8}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--fg);line-height:1.6}
+  .wrap{max-width:980px;margin:0 auto;padding:32px 20px 60px}
+  header{text-align:center;padding:24px 0 8px}
+  h1{font-size:28px;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{color:var(--muted);margin-top:10px;font-size:15px}
+  .count{display:inline-block;margin-top:14px;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:13px;color:var(--muted)}
+  .install{margin:24px auto;max-width:680px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;text-align:left}
+  .install code{display:block;background:#0c0e14;border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:13px;color:#c8d3ff;word-break:break-all;white-space:pre-wrap;margin-bottom:12px}
+  .btn{display:inline-block;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:13px;cursor:pointer;margin-right:8px}
+  .btn:hover{filter:brightness(1.1)}
+  .btn.ghost{background:transparent;border:1px solid var(--border);color:var(--fg)}
+  h2{font-size:19px;margin:30px 0 6px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-top:14px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;transition:transform .12s,border-color .12s}
+  .card:hover{transform:translateY(-2px);border-color:var(--accent)}
+  .card .name{font-size:15px;font-weight:600;color:var(--accent2)}
+  .card .name::before{content:"@";color:var(--accent);margin-right:1px}
+  .card .desc{font-size:13px;color:var(--muted);margin-top:6px}
+  .copy{display:inline-block;margin-top:10px;font-size:12px;color:var(--accent);cursor:pointer;background:none;border:none;padding:0;text-decoration:underline}
+  .copy:hover{color:var(--accent2)}
+  footer{text-align:center;color:var(--muted);font-size:13px;margin-top:40px;border-top:1px solid var(--border);padding-top:22px}
+  .donate{margin:20px auto;text-align:center}
+  .donate img{width:170px;border-radius:10px;border:1px solid var(--border)}
+  .donate p{color:var(--muted);font-size:13px;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🔬 AI4科研 智能体 · 科研日常事务助手</h1>
+    <div class="sub">10 个开箱即用的科研日常 AI 智能体：论文写作、图表规范、基金、答辩、选刊、引用、统计与组会。</div>
+    <div class="count">10 个智能体 · 即装即用</div>
+  </header>
+
+  <div class="install">
+    <code>git clone https://github.com/qgeng1465/ai4research-agents.git
+cd ai4research-agents
+python install.py</code>
+    <button class="btn" onclick="copyCmd('git clone https://github.com/qgeng1465/ai4research-agents.git && cd ai4research-agents && python install.py')">复制安装命令</button>
+    <button class="btn ghost" onclick="copyCmd('python install.py --list')">复制查看命令</button>
+  </div>
+
+  <h2>📦 智能体列表</h2>
+  <div class="grid" id="list"></div>
+
+  <footer>
+    <div class="donate">
+      <img src="assets/donate.png" alt="赞赏码">
+      <p>如果这些智能体帮到了你，欢迎扫码赞赏支持～</p>
+    </div>
+    <div>MIT Licensed · © 2026 qgeng1465 · 仅供学习研究与个人合理使用</div>
+  </footer>
+</div>
+<script>
+  const AGENTS = [["citation-manager","文献引用整理：把引用列表按格式（GB/T 7714/APA/MLA/Vancouver）规范化、去重、核对 DOI，输出可粘贴的引用表。用法：粘贴引用列表或 DOI。"],["defense-ppt","开题/中期/毕业答辩 PPT：按研究内容产出每页标题、要点、图表建议与答辩讲稿、常见提问准备。用法：给我课题名称与研究内容。"],["figure-spec","科研图表规范：检查并改进图片/图表格式（分辨率、字号、色彩、误差线、图例），符合目标期刊要求。用法：给我图表描述或图文件信息。"],["grant-writing","基金/标书写作：立项依据、研究内容与方案、创新点、研究基础、预算编制，符合国内基金写作规范。用法：给我研究方向与背景。"],["group-meeting","组会汇报：把本周/阶段工作整理成组会汇报提纲（进展/数据/问题/求助），生成汇报要点与讲解话术。用法：粘贴本周工作内容。"],["journal-finder","期刊推荐与投稿选刊：按研究方向/影响力/开放获取/审稿周期推荐候选期刊，给出投稿建议。用法：给我论文主题与目标档次。"],["lab-notebook","实验记录整理：把零散/手写的实验记录整理成规范的电子实验记录（目的/材料/步骤/原始数据/结果/结论）。用法：粘贴实验记录。"],["paper-polish","学术论文润色：中式英文/语病/时态/术语/逻辑衔接优化，输出润色稿与修改说明，可指定期刊风格。用法：粘贴段落或全文。"],["paper-revise","论文降重与改写：对重复率高的段落做同义改写、结构调整、句式变换，保留原意与科学信息。用法：粘贴需改写的段落。"],["stats-helper","科研统计助手：选对检验方法、给出 SPSS/Python 代码、解读结果并给出论文报告语句。用法：描述数据类型与研究设计。"]];
+  const box = document.getElementById("list");
+  box.innerHTML = AGENTS.map(([n,d]) =>
+    `<div class="card">
+      <div class="name">${n}</div>
+      <div class="desc">${d}</div>
+      <button class="copy" onclick="copyName('${n}')">复制 @${n}</button>
+    </div>`).join("");
+  function copyName(n){
+    navigator.clipboard.writeText("@" + n).then(()=>toast("已复制 @"+n+" ✓"));
+  }
+  function copyCmd(c){
+    navigator.clipboard.writeText(c).then(()=>toast("已复制安装命令 ✓"));
+  }
+  function toast(msg){
+    const t = document.createElement("div");
+    t.style.cssText = "position:fixed;left:50%;bottom:36px;transform:translateX(-50%);background:#1a1d27;border:1px solid var(--accent);color:var(--fg);padding:10px 18px;border-radius:10px;font-size:13px;z-index:99;box-shadow:0 4px 20px rgba(0,0,0,.4)";
+    t.textContent = msg;
+    document.body.appendChild(t);
+    setTimeout(()=>t.remove(), 1600);
+  }
+</script>
+</body>
+</html>
